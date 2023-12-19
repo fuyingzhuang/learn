@@ -25,6 +25,17 @@ class LearnApplicationTests {
      */
 
 
+    /**
+     * set 命令
+     * 参数 ex seconds 设置过期时间 单位是秒
+     * 参数 px milliseconds 设置过期时间 单位是毫秒
+     * 参数 nx 只有key不存在的时候才会设置key
+     * 参数 xx 只有key存在的时候才会设置key
+     * 参数 exat timestamp 设置过期时间 单位是秒 Unix时间戳
+     * 参数 pxat timestamp 设置过期时间 单位是毫秒 Unix时间戳
+     * 参数 keepttl 如果key已经存在 那么设置key的过期时间为之前的过期时间 无论你传递的过期时间是多少 都保留之前的过期时间
+     */
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

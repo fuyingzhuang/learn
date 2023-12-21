@@ -62,7 +62,32 @@ class LearnApplicationTests {
      * lset key index value 将key的value的列表中指定索引的value设置为value
      * linsert key before|after pivot value 在key的value的列表中的pivot的前面或者后面插入value
      * 应用场景 比如抖音的评论列表 评论列表是一个列表 从头部插入 从尾部删除 一对多的关系
-     * 
+     *
+     */
+
+    /**
+     * hash 类似java的 Map<String,Map<String,String>>
+     * hset key field value 设置key的field的value
+     * hget key field 获取key的field的value
+     * hmset key field value [field value ...] 设置key的多个field的value
+     * hmget key field [field ...] 获取key的多个field的value
+     * hgetall key 获取key的所有field和value
+     * hdel key field [field ...] 删除key的多个field
+     * hlen key 获取key的field的数量
+     * hexists key field 判断key的field是否存在
+     * hkrys key 获取key的所有field
+     * hvals key 获取key的所有value
+     * hincrby key field increment 将key的field的value加increment
+     * hincrbyfloat key field increment 将key的field的value加increment
+     * hsetnx key field value 只有key的field不存在的时候才会设置key的field的value
+     * 购物车的场景
+     * hset cart:1 product:1 1 product:2 2 product:3 3
+     * 添加数量
+     * hincrby cart:1 product:1 1
+     * 删除商品
+     * hdel cart:1 product:1
+     * 查询商品数量
+     * hget cart:1 product:1
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

@@ -89,6 +89,27 @@ class LearnApplicationTests {
      * 查询商品数量
      * hget cart:1 product:1
      */
+
+
+    /**
+     * set 类似java的 Set<String> 无序 不重复
+     * sadd key member [member ...] 向key中添加member
+     * smembers key 获取key中的所有member
+     * sismember key member 判断key中是否存在member
+     * scard key 获取key中的member的数量
+     * spop key 随机删除key中的一个member
+     * srandmember key [count] 随机获取key中的一个member 如果count大于0 那么获取count个member
+     * srem key member [member ...] 删除key中的member
+     * smove source destination member 将source中的member移动到destination中
+     * sdiff key [key ...] 获取key中的member和其他key中的member的差集
+     * sdiffstore destination key [key ...] 获取key中的member和其他key中的member的差集 并且将差集保存到destination中
+     * sinter key [key ...] 获取key中的member和其他key中的member的交集
+     * sinterstore destination key [key ...] 获取key中的member和其他key中的member的交集 并且将交集保存到destination中
+     * sunion key [key ...] 获取key中的member和其他key中的member的并集
+     * sunionstore destination key [key ...] 获取key中的member和其他key中的member的并集 并且将并集保存到destination中
+     * 应用场景 共同好友 交集 两个人的好友列表并集 你可能认识的人 差集 你的好友列表和你可能认识的人的列表的差集
+     * 微信朋友圈的点赞列表 交集 你的好友列表和你的朋友圈的点赞列表的交集
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

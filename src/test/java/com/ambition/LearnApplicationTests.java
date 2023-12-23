@@ -110,6 +110,22 @@ class LearnApplicationTests {
      * 应用场景 共同好友 交集 两个人的好友列表并集 你可能认识的人 差集 你的好友列表和你可能认识的人的列表的差集
      * 微信朋友圈的点赞列表 交集 你的好友列表和你的朋友圈的点赞列表的交集
      */
+
+    /**
+     * zset 类似java的 SortedSet<String> 有序 不重复 每个元素都有一个分数 通过分数进行排序 也可以通过分数进行范围查询
+     * zadd key score member [score member ...] 向key中添加member
+     * zrange key start stop [withscores] 获取key中的member 从start到stop 如果withscores为true 那么获取member和分数 从小到大排序
+     * zrevrange key start stop [withscores] 获取key中的member 从start到stop 如果withscores为true 那么获取member和分数 从大到小排序
+     * zrangebyscore key min max [withscores] 获取key中的member 从min到max 如果withscores为true 那么获取member和分数 从小到大排序
+     * zscore key member 获取key中member的分数
+     * zcard key 获取key中的member的数量
+     * zrem  key member [member ...] 删除key中的member
+     * zincrby key increment member 将key中member的分数加increment
+     * zcount key min max 获取key中member的分数在min和max之间的数量
+     * zrank key member 获取key中member的排名 从小到大排序
+     * zrevrank key member 获取key中member的排名 从大到小排序
+     * 应用场景 排行榜 根据商品的销量进行排行
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

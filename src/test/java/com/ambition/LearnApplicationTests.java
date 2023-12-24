@@ -126,6 +126,16 @@ class LearnApplicationTests {
      * zrevrank key member 获取key中member的排名 从大到小排序
      * 应用场景 排行榜 根据商品的销量进行排行
      */
+
+    /**
+     * bitmap 位图 由0和1状态表现的二进制位的bit数组
+     * setbit key offset value 设置key的offset的bit位为value
+     * getbit key offset 获取key的offset的bit位的值
+     * strlen key 统计字节长度 安装字节进行统计 每个字节8位 每次申请的内存是8位
+     * bitcount key [start end] 获取key的start到end的bit位中值为1的数量
+     * bitop operation  operation是and or xor not  destination key [key ...] 将key的bit位和其他key的bit位进行operation运算 并且将结果保存到destination中
+     * 应用场景 用户签到 一个用户一年365天 365个bit位 0表示未签到 1表示签到
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

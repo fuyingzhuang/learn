@@ -147,6 +147,16 @@ class LearnApplicationTests {
      * pfmerge destination key [key ...] 将key中的基数和其他key中的基数进行合并 并且将结果保存到destination中
      * 应用场景 统计网站的UV 统计每天的UV 统计每个月的UV 统计每年的UV
      */
+
+    /**
+     * geo 地理位置
+     * geoadd key longitude latitude member [longitude latitude member ...] 向key中添加member
+     * geopos key member [member ...] 获取key中的member的经纬度
+     * geodist key member1 member2 [unit] 获取key中的member1和member2的距离 unit是m km mi ft
+     * georadius key longitude latitude radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
+     * georadiusbymember key member radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
+     * 应用场景 附近的人 附近的商家 附近的车位
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

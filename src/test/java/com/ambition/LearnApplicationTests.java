@@ -136,6 +136,17 @@ class LearnApplicationTests {
      * bitop operation  operation是and or xor not  destination key [key ...] 将key的bit位和其他key的bit位进行operation运算 并且将结果保存到destination中
      * 应用场景 用户签到 一个用户一年365天 365个bit位 0表示未签到 1表示签到
      */
+
+    /**
+     * hyperloglog 用来做基数统计的算法
+     * 什么是基数?
+     * 一个集合中不重复元素的个数 每一个元素都是唯一的 不能重复
+     * 去重脱水之后的真实数量
+     * pfadd key element [element ...] 向key中添加element
+     * pfcount key 获取key中的基数
+     * pfmerge destination key [key ...] 将key中的基数和其他key中的基数进行合并 并且将结果保存到destination中
+     * 应用场景 统计网站的UV 统计每天的UV 统计每个月的UV 统计每年的UV
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

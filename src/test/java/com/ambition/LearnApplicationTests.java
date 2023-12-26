@@ -152,10 +152,22 @@ class LearnApplicationTests {
      * geo 地理位置
      * geoadd key longitude latitude member [longitude latitude member ...] 向key中添加member
      * geopos key member [member ...] 获取key中的member的经纬度
+     * geohash key member [member ...] 获取key中的member的geohash
      * geodist key member1 member2 [unit] 获取key中的member1和member2的距离 unit是m km mi ft
      * georadius key longitude latitude radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
      * georadiusbymember key member radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
      * 应用场景 附近的人 附近的商家 附近的车位
+     */
+
+    /**
+     * redis流 stream 用list实现消息队列 lpush 添加消息 rpop 获取消息 一对一
+     * pub sub 一对多 一个消息发布者 多个消息订阅者 Message Content 每一个消息都有一个唯一的id
+     * Consumer Group 消费者组 每一个消费者组都有一个唯一的名称 通过xgroup创建消费者组 同一个消费者组中的消费者不能消费同一个消息 同一个消费者组中的消费者可以消费不同的消息
+     * Last Delivered ID 消费者组中每一个消费者消费的最后一个消息的id 游标 每个消费者组会有个游标 用来记录消费者组中每一个消费者消费的最后一个消息的id 任意一个消费者消费了一个消息 游标就会向前移动
+     * Consumer 消费者 消费者组中的消费者
+     * Pending ids 消费者会有一个状态变量 用于记录呗当前消费已读取但为ack的消息的id 如果客户端没有ack 这个变量会一直增长 一旦某个消息被ack他就开始减少
+     * 这个pending ids的长度就是当前消费者还有多少消息没有被ack
+     * xadd key id field value [field value ...] 向key中添加数据
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

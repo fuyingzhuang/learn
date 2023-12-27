@@ -167,7 +167,15 @@ class LearnApplicationTests {
      * Consumer 消费者 消费者组中的消费者
      * Pending ids 消费者会有一个状态变量 用于记录呗当前消费已读取但为ack的消息的id 如果客户端没有ack 这个变量会一直增长 一旦某个消息被ack他就开始减少
      * 这个pending ids的长度就是当前消费者还有多少消息没有被ack
-     * xadd key id field value [field value ...] 向key中添加数据
+     * xadd key id field value [field value ...] 向key中添加数据 消息的id是自动生成的 用*表示 也可以自己指定id 但是id必须是唯一的
+     * 生成的消息id是一个64位的整数 由毫秒时间戳和序列号组成
+     * xrang key start end [count count] 获取key中的消息 从start到end 如果count不为空 那么获取count条消息
+     * xrevrange key end start [count count] 获取key中的消息 从end到start 如果count不为空 那么获取count条消息
+     * xdel key id [id ...] 删除key中的消息
+     * xlen key 获取key中的消息的数量
+     * xrange key - + 获取key中的所有消息
+     * xread count count streams key [key ...] id [id ...] 从key中读取count条消息
+     *
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

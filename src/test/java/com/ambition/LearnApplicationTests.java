@@ -175,7 +175,12 @@ class LearnApplicationTests {
      * xlen key 获取key中的消息的数量
      * xrange key - + 获取key中的所有消息
      * xread count count streams key [key ...] id [id ...] 从key中读取count条消息
-     *
+     * xgroup create key groupname id [mkstream] 创建消费者组
+     * xreadgroup groupname consumer count streams key [key ...] id [id ...] 从key中读取count条消息
+     * xack key groupname id [id ...] 消费者ack消息
+     * xpending key groupname [start end count] [consumer] 获取消费者组中的消费者的状态
+     * xclaim key groupname consumer min-idle-time id [id ...] [idle time ms] [retrycount] [force] 将消息从一个消费者组中转移到另一个消费者组中
+     * 应用场景 消息队列 还是用MQ吧 redis的消息队列不太好用
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

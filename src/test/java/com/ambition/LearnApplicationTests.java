@@ -182,6 +182,12 @@ class LearnApplicationTests {
      * xclaim key groupname consumer min-idle-time id [id ...] [idle time ms] [retrycount] [force] 将消息从一个消费者组中转移到另一个消费者组中
      * 应用场景 消息队列 还是用MQ吧 redis的消息队列不太好用
      */
+
+    /**
+     * bitfield key [get type offset] [set type offset value] [incrby type offset increment] [overflow wrap|sat|fail] 对key中的二进制位进行操作
+     * 应用场景 用来做计数器
+     * 一个用户一年365天 365个bit位 0表示未签到 1表示签到 一个用户一年最多签到365次
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

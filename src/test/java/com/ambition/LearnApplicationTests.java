@@ -188,6 +188,11 @@ class LearnApplicationTests {
      * 应用场景 用来做计数器
      * 一个用户一年365天 365个bit位 0表示未签到 1表示签到 一个用户一年最多签到365次
      */
+
+    /**
+     * redis 持久化 将内存中的数据保存到硬盘中 通过rdb和aof两种方式实现
+     * RDB Redis DataBase
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

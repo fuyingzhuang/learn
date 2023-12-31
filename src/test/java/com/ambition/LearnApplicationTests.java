@@ -191,8 +191,9 @@ class LearnApplicationTests {
 
     /**
      * redis 持久化 将内存中的数据保存到硬盘中 通过rdb和aof两种方式实现
-     * RDB Redis DataBase
-     * AOF Append Only File
+     * RDB Redis DataBase 持久性的保存数据 快照 在指定的时间间隔内将内存中的数据保存到硬盘中 保存的是内存中的数据的快照 这个快件文件为dump.rdb 默认是关闭的 可以通过配置文件开启 也可以通过命令开启
+     * 如果重启了redis 会自动加载dump.rdb文件 会将dump.rdb文件中的数据加载到内存中 
+     * AOF Append Only File 以日志的形式来记录每个写操作 以文本的形式记录 通过追加的方式写入文件 默认是开启的 可以通过配置文件关闭 也可以通过命令关闭
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

@@ -192,6 +192,7 @@ class LearnApplicationTests {
     /**
      * redis 持久化 将内存中的数据保存到硬盘中 通过rdb和aof两种方式实现
      * RDB Redis DataBase
+     * AOF Append Only File
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

@@ -15,9 +15,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Test {
 
 
+    /**
+     * park 阻塞线程 使其进入等待状态 但是不会释放锁 与wait不同 wait会释放锁
+     * park释放锁需要手动调用unpark
+     * @param args
+     */
     public static void main(String[] args) {
-//        ReentrantLock reentrantLock = new ReentrantLock();
-        DiyLock reentrantLock = new DiyLock();
+        ReentrantLock reentrantLock = new ReentrantLock();
+//        DiyLock reentrantLock = new DiyLock();
         new Thread(new Runnable() {
             @Override
             public void run() {

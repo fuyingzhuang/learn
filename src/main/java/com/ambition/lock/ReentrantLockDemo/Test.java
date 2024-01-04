@@ -13,6 +13,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * while(true) 阻塞线程
  */
 public class Test {
+    /**
+     * 非公平锁 和 公平锁
+     * 非公平锁：线程获取锁的顺序是随机的
+     * 公平锁：线程获取锁的顺序是按照线程的启动顺序来的
+     * 
+     */
 
 
     /**
@@ -28,7 +34,7 @@ public class Test {
             public void run() {
                 try {
                     reentrantLock.lock();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 try {
@@ -43,7 +49,7 @@ public class Test {
             public void run() {
                 try {
                     reentrantLock.lock();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 try {

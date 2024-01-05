@@ -11,13 +11,14 @@ import java.util.concurrent.locks.ReentrantLock;
  * sleep 阻塞线程
  * park 阻塞线程
  * while(true) 阻塞线程
+ * 累
  */
 public class Test {
     /**
      * 非公平锁 和 公平锁
      * 非公平锁：线程获取锁的顺序是随机的
      * 公平锁：线程获取锁的顺序是按照线程的启动顺序来的
-     * 
+     *
      */
 
 

@@ -11,7 +11,6 @@ import java.util.concurrent.locks.ReentrantLock;
  * sleep 阻塞线程
  * park 阻塞线程
  * while(true) 阻塞线程
- * 累 累
  */
 public class Test {
     /**
@@ -25,6 +24,7 @@ public class Test {
     /**
      * park 阻塞线程 使其进入等待状态 但是不会释放锁 与wait不同 wait会释放锁
      * park释放锁需要手动调用unpark
+     *
      * @param args
      */
     public static void main(String[] args) {

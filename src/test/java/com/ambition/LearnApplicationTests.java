@@ -196,7 +196,13 @@ class LearnApplicationTests {
      * 如果重启了redis 会自动加载dump.rdb文件 会将dump.rdb文件中的数据加载到内存中
      * AOF Append Only File 以日志的形式来记录每个写操作 以文本的形式记录 通过追加的方式写入文件 默认是开启的 可以通过配置文件关闭 也可以通过命令关闭
      * 如果重启了redis 会自动读取aof文件 会将aof文件中的命令重新执行一遍
-     *
+     * <p>
+     * RDB的优点
+     * 1.适合大规模的数据恢复
+     * <p>
+     * RDB的缺点
+     * 1.如果redis意外宕机 会丢失最后一次快照后的所有数据
+     * 2.如果数据比较大 保存快照的时间会比较长
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

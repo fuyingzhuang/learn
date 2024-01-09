@@ -199,10 +199,26 @@ class LearnApplicationTests {
      * <p>
      * RDB的优点
      * 1.适合大规模的数据恢复
+     * 2.按照业务定时备份
+     * 3.对数据完整性和一致性要求不高
+     * 4.RDB文件在内存中的加载速度比AOF快
      * <p>
      * RDB的缺点
      * 1.如果redis意外宕机 会丢失最后一次快照后的所有数据
      * 2.如果数据比较大 保存快照的时间会比较长
+     * <p>
+     * 修复RDB文件
+     * redis-check-dump --fix dump.rdb
+     * 触发RDB快照
+     * 1. save 阻塞redis服务器 会阻塞所有的客户端
+     * 2. bgsave 在后台执行 快照期间可以处理客户端的请求
+     * 3. save 900 1 900秒内如果有一个key发生了变化 那么就会触发快照
+     * 4. flushall flushdb
+     * 5. 执行shutdown 但是没有开启aof的话 会自动执行bgsave
+     * 6. 主从复制时 主节点自动触发
+     * 如何禁用快照
+     * 1. redis-cli config set save "" 命令行禁用
+     * 2. 在配置文件中注释掉所有的save配置
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

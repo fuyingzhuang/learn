@@ -220,6 +220,18 @@ class LearnApplicationTests {
      * 1. redis-cli config set save "" 命令行禁用
      * 2. 在配置文件中注释掉所有的save配置
      */
+
+    /**
+     * redis持久化
+     * AOF 需要在配置文件中打开AOF的配置
+     * AOF 以日志的形式记录每个写操作 以文本的形式记录 将redis执行过的所有写命令记录下来 不记录读命令 只许追加文件 不可以改写文件
+     * 1.每一个写命令都会追加到aof文件中
+     * 2.文件的写入是顺序的 不需要随机访问硬盘
+     * 三种写回策略
+     * 1.每秒钟写一次
+     * 2.每执行一条命令就写一次
+     * 3.不主动写入 由操作系统决定什么时候写入
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

@@ -302,6 +302,14 @@ class LearnApplicationTests {
      * 3. multi 开启事务
      * 4. exec 执行事务
      * 5. discard 取消事务
+     * <p>
+     * 采用乐观锁的方式实现watch
+     * 1.在执行watch命令时 记录被监视的key的值
+     * 2.在执行exec命令时 检查被监视的key是否发生了改变 如果是 则放弃执行事务 否则执行事务
+     * 不支持回滚
+     * 1.如果事务中的某个命令执行失败 那么其后的命令仍然会被执行
+     * 2.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令仍然会被执行
+     * 3.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令不会被执行
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

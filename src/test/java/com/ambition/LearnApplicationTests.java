@@ -311,6 +311,20 @@ class LearnApplicationTests {
      * 2.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令仍然会被执行
      * 3.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令不会被执行
      */
+
+    /**
+     * redis管道 pipeline 可以一次性发送多个命令给服务端 执行完毕后一次性返回结果
+     * 1.减少网络开销
+     * 2.批量执行命令
+     * 3.原子操作
+     * 4.减少客户端的压力
+     * 5.管道中的命令没有被打断
+     * 例子: cmd.txt
+     * redis-cli --pipe < cmd.txt
+     * redis-cli --pipe < cmd.txt > result.txt
+     * redis-cli --pipe < cmd.txt | redis-cli --pipe > result.txt
+     * 
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

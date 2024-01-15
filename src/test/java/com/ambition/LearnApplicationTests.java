@@ -313,18 +313,52 @@ class LearnApplicationTests {
      */
 
     /**
-     * redis管道 pipeline 可以一次性发送多个命令给服务端 执行完毕后一次性返回结果
+     * redis管道 pipeline 可以一次性发送多个命令给服务端 执行完毕后一次性返回结果 不是原子性的
      * 1.减少网络开销
      * 2.批量执行命令
-     * 3.原子操作
-     * 4.减少客户端的压力
-     * 5.管道中的命令没有被打断
+     * 3.减少客户端的压力
+     * 4.管道中的命令没有被打断
      * 例子: cmd.txt
      * redis-cli --pipe < cmd.txt
      * redis-cli --pipe < cmd.txt > result.txt
      * redis-cli --pipe < cmd.txt | redis-cli --pipe > result.txt
-     * 
+     * pipeline与原生批量操作的区别
+     * 1. 原生批量操作是将多个命令一次性发送给redis服务端，然后服务端一次性返回结果
+     * 2. pipeline是将多个命令一次性发送给redis服务端，但是服务端并不是一次性返回结果，而是将命令的执行结果一次性返回给客户端 需要结合linux的管道符号才能一次性返回结果
+     * 3. 原生批量操作是原子性的，pipeline不是原子性的
+     * pipeline与事物的区别
+     * 1. 事物具有原子性，pipeline不具有原子性
+     * 2. 事物可以保证事物中的命令被连续执行，pipeline不能保证被连续执行
+     * 3. 事物可以保证事物中的命令不会被其他命令打断，pipeline不能保证不会被其他命令打断
+     * 注意事项
+     * 1. pipeline中的命令不会被打断
+     * 2. pipeline中的命令不会被事物所影响
+     * 3. pipeline中的命令不会被watch所影响
      */
+    /**
+     * redis发布订阅
+     * Redis 的发布/订阅是一种消息传递模式，其中发布者将消息发送到特定的频道，而订阅者则通过订阅这些频道来接收消息。这种模式允许多个订阅者同时接收相同的消息，从而实现了消息的广播。
+     * <p>
+     * 下面是 Redis 发布/订阅的基本步骤：
+     * <p>
+     * 订阅者通过执行 SUBSCRIBE 命令来订阅一个或多个频道。例如，订阅者可以执行 SUBSCRIBE channel1 channel2 来同时订阅 channel1 和 channel2 两个频道。
+     * <p>
+     * 发布者使用 PUBLISH 命令将消息发送到一个或多个频道。例如，发布者可以执行 PUBLISH channel1 "Hello, World!" 将消息 "Hello, World!" 发送到 channel1 频道。
+     * <p>
+     * 订阅者会在后台持续监听所订阅的频道。一旦有消息发布到已经订阅的频道上，订阅者就会收到消息。
+     * <p>
+     * 订阅者可以通过执行 UNSUBSCRIBE 命令来取消对某个或所有频道的订阅。例如，订阅者可以执行 UNSUBSCRIBE channel1 来取消对 channel1 频道的订阅。
+     * <p>
+     * 需要注意的是，Redis 的发布/订阅模式是异步的，发布者和订阅者之间没有直接的交互。发布者只需将消息发送到频道，而不需要知道哪些订阅者正在监听该频道。同样地，订阅者也不需要知道消息来自于哪个发布者。
+     * <p>
+     * 此外，Redis 还提供了其他一些相关命令和功能，例如：
+     * <p>
+     * PSUBSCRIBE 和 PUNSUBSCRIBE 命令：用于支持通配符模式的订阅和取消订阅。
+     * PUBLISH 命令支持向多个频道同时发布消息。
+     * 订阅者可以通过使用 SUBSCRIBE 命令的阻塞模式来等待消息，从而避免了频繁的轮询操作。
+     * 总结起来，Redis 的发布/订阅功能允许发布者将消息发送到指定的频道，而订阅者可以选择性地订阅这些频道以接收消息。这种模式可以在分布式系统中实现事件通知、实时消息推送等功能，非常灵活和高效。
+     */
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

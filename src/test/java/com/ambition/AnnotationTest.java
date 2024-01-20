@@ -15,7 +15,7 @@ public class AnnotationTest {
     @InitDemo
     public void test() {
         System.out.println("test");
-        
+
     }
 
 

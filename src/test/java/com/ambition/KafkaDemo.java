@@ -6,4 +6,7 @@ package com.ambition;
  * KafkaDemo kafka学习
  */
 public class KafkaDemo {
+    public static void main(String[] args) {
+        
+    }
 }

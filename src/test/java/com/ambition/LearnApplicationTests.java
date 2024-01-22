@@ -388,6 +388,21 @@ class LearnApplicationTests {
      * slaveof no one 取消主从关系
      */
 
+
+    /**
+     * redis哨兵
+     * Redis Sentinel（哨兵）是 Redis 的高可用性解决方案，它能为 Redis 提供监控、通知以及自动故障迁移等功能。
+     * 吹哨人 巡查redis 主机是否正常 根据投票数将主机切换 俗称 无人值守的哨兵机制
+     * 作用:
+     * 监控redis的运行状态 包括master和slave
+     * 当master宕机时 自动将slave切换为master
+     * 当master重新启动后 将其作为slave加入到集群中
+     * 优点:
+     * 哨兵模式是一种无中心化的模式，不存在单点故障，任何一个哨兵出现故障，其他哨兵和Redis实例都能正常工作。
+     * 哨兵模式可以实现自动故障转移，当主服务器出现故障时，可以自动将一个从服务器转换为新的主服务器，实现Redis高可用性。
+     * 哨兵模式可以实现监控，通过向被监控的Redis实例发送命令，哨兵可以获取Redis实例的信息和状态，以及整个哨兵集群的信息和状态。
+     * 哨兵模式可以实现通知，当被监控的Redis实例出现故障时，哨兵可以通过API向管理员或者其他应用程序发送通知。
+     */
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

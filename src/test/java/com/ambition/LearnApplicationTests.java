@@ -403,6 +403,20 @@ class LearnApplicationTests {
      * 哨兵模式可以实现监控，通过向被监控的Redis实例发送命令，哨兵可以获取Redis实例的信息和状态，以及整个哨兵集群的信息和状态。
      * 哨兵模式可以实现通知，当被监控的Redis实例出现故障时，哨兵可以通过API向管理员或者其他应用程序发送通知。
      * 哨兵模式可以实现配置中心，通过哨兵，管理员可以集中管理多个Redis实例的配置，包括每个实例的数据库数量、每个实例是否持久化以及是否开启只读等。
+     * <p>
+     * Redis Sentinel 是 Redis 的高可用性解决方案，它可以监控 Redis 服务器的状态，并在主服务器发生故障时自动将一个从服务器提升为新的主服务器。Redis Sentinel 可以对单个 Redis 服务器进行监控，也可以对 Redis 集群进行监控。
+     * <p>
+     * Sentinel 是一个独立的进程，它通过向 Redis 服务器发送命令来检查服务器是否在线，并及时发现主服务器故障、从服务器故障、网络分区等情况。当发现故障时，Sentinel 会根据预设的规则自动进行故障转移操作，使集群保持高可用性。
+     * <p>
+     * Redis Sentinel 依赖于 Redis 的发布-订阅功能实现消息通知和故障转移操作，因此 Sentinel 和 Redis 是密切相关的两个组件。Sentinel 可以通过订阅 Redis 发布的消息，实时获取 Redis 服务器的状态信息，并及时做出相应的反应。同时，Redis 服务器也可以通过向 Sentinel 发布消息，告知 Sentinel 其状态信息，以及请求 Sentinel 执行某些操作，如故障转移等。
+     * <p>
+     * 因此，Sentinel 和 Redis 是互相依赖、紧密配合的两个组件，共同构建了 Redis 的高可用性解决方案。
+     * 配置:
+     * 哨兵的端口号默认是26379 哨兵一般是单独部署的 一般是奇数个
+     * sentinel.conf
+     * <p>
+     * sentinel monitor mymaster ip port quorum
+     * quorum:投票数 一般为哨兵数量的一半加1
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

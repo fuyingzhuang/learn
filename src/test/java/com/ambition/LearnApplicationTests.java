@@ -5,9 +5,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @SpringBootTest
 class LearnApplicationTests {
+
     /**
      * keys * 查询所有的key
      * keys *name 查询所有以name结尾的key
@@ -23,10 +25,10 @@ class LearnApplicationTests {
      * flushall 清空所有数据库
      * redis key是区分大小写的 命令不区分大小写
      * help 查看帮助
-     */
-
-
-    /**
+     * <p>
+     * <p>
+     * <p>
+     * <p>
      * set 命令
      * 参数 ex seconds 设置过期时间 单位是秒
      * 参数 px milliseconds 设置过期时间 单位是毫秒
@@ -35,19 +37,19 @@ class LearnApplicationTests {
      * 参数 exat timestamp 设置过期时间 单位是秒 Unix时间戳
      * 参数 pxat timestamp 设置过期时间 单位是毫秒 Unix时间戳
      * 参数 keepttl 如果key已经存在 那么设置key的过期时间为之前的过期时间 无论你传递的过期时间是多少 都保留之前的过期时间
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * getrange key start end 获取key的value的子字符串
      * setrange key offset value 用value覆盖key的value 从offset开始
      * incr key 将key的value加1 应用场景 比如 抖音的点赞数 能够点一下增加1 无限增加
      * incrby key increment 将key的value加increment
      * decr key 将key的value减1
      * decrby key decrement 将key的value减decrement
-     */
-
-
-    /**
+     * <p>
+     * <p>
+     * <p>
+     * <p>
      * list列表
      * 底层是一个双端链表 可以从头部插入 也可以从尾部插入 也可以从头部删除 也可以从尾部删除
      * lpush key value [value ...] 从头部插入
@@ -63,11 +65,11 @@ class LearnApplicationTests {
      * lset key index value 将key的value的列表中指定索引的value设置为value
      * linsert key before|after pivot value 在key的value的列表中的pivot的前面或者后面插入value
      * 应用场景 比如抖音的评论列表 评论列表是一个列表 从头部插入 从尾部删除 一对多的关系
-     *
-     */
-
-    /**
-     * hash 类似java的 Map<String,Map<String,String>>
+     * <p>
+     * <p>
+     * <p>
+     * <p>
+     * hash 类似java的 Map<String, Map<String,String>>
      * hset key field value 设置key的field的value
      * hget key field 获取key的field的value
      * hmset key field value [field value ...] 设置key的多个field的value
@@ -89,10 +91,10 @@ class LearnApplicationTests {
      * hdel cart:1 product:1
      * 查询商品数量
      * hget cart:1 product:1
-     */
-
-
-    /**
+     * <p>
+     * <p>
+     * <p>
+     * <p>
      * set 类似java的 Set<String> 无序 不重复
      * sadd key member [member ...] 向key中添加member
      * smembers key 获取key中的所有member
@@ -110,9 +112,9 @@ class LearnApplicationTests {
      * sunionstore destination key [key ...] 获取key中的member和其他key中的member的并集 并且将并集保存到destination中
      * 应用场景 共同好友 交集 两个人的好友列表并集 你可能认识的人 差集 你的好友列表和你可能认识的人的列表的差集
      * 微信朋友圈的点赞列表 交集 你的好友列表和你的朋友圈的点赞列表的交集
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * zset 类似java的 SortedSet<String> 有序 不重复 每个元素都有一个分数 通过分数进行排序 也可以通过分数进行范围查询
      * zadd key score member [score member ...] 向key中添加member
      * zrange key start stop [withscores] 获取key中的member 从start到stop 如果withscores为true 那么获取member和分数 从小到大排序
@@ -126,9 +128,9 @@ class LearnApplicationTests {
      * zrank key member 获取key中member的排名 从小到大排序
      * zrevrank key member 获取key中member的排名 从大到小排序
      * 应用场景 排行榜 根据商品的销量进行排行
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * bitmap 位图 由0和1状态表现的二进制位的bit数组
      * setbit key offset value 设置key的offset的bit位为value
      * getbit key offset 获取key的offset的bit位的值
@@ -136,9 +138,9 @@ class LearnApplicationTests {
      * bitcount key [start end] 获取key的start到end的bit位中值为1的数量
      * bitop operation  operation是and or xor not  destination key [key ...] 将key的bit位和其他key的bit位进行operation运算 并且将结果保存到destination中
      * 应用场景 用户签到 一个用户一年365天 365个bit位 0表示未签到 1表示签到
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * hyperloglog 用来做基数统计的算法
      * 什么是基数?
      * 一个集合中不重复元素的个数 每一个元素都是唯一的 不能重复
@@ -147,9 +149,9 @@ class LearnApplicationTests {
      * pfcount key 获取key中的基数
      * pfmerge destination key [key ...] 将key中的基数和其他key中的基数进行合并 并且将结果保存到destination中
      * 应用场景 统计网站的UV 统计每天的UV 统计每个月的UV 统计每年的UV
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * geo 地理位置
      * geoadd key longitude latitude member [longitude latitude member ...] 向key中添加member
      * geopos key member [member ...] 获取key中的member的经纬度
@@ -158,9 +160,9 @@ class LearnApplicationTests {
      * georadius key longitude latitude radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
      * georadiusbymember key member radius m|km|mi|ft [withcoord] [withdist] [withhash] [count count] [asc|desc] [store key] [storedist key] 获取key中的member的经纬度
      * 应用场景 附近的人 附近的商家 附近的车位
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis流 stream 用list实现消息队列 lpush 添加消息 rpop 获取消息 一对一
      * pub sub 一对多 一个消息发布者 多个消息订阅者 Message Content 每一个消息都有一个唯一的id
      * Consumer Group 消费者组 每一个消费者组都有一个唯一的名称 通过xgroup创建消费者组 同一个消费者组中的消费者不能消费同一个消息 同一个消费者组中的消费者可以消费不同的消息
@@ -182,15 +184,15 @@ class LearnApplicationTests {
      * xpending key groupname [start end count] [consumer] 获取消费者组中的消费者的状态
      * xclaim key groupname consumer min-idle-time id [id ...] [idle time ms] [retrycount] [force] 将消息从一个消费者组中转移到另一个消费者组中
      * 应用场景 消息队列 还是用MQ吧 redis的消息队列不太好用
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * bitfield key [get type offset] [set type offset value] [incrby type offset increment] [overflow wrap|sat|fail] 对key中的二进制位进行操作
      * 应用场景 用来做计数器
      * 一个用户一年365天 365个bit位 0表示未签到 1表示签到 一个用户一年最多签到365次
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis 持久化 将内存中的数据保存到硬盘中 通过rdb和aof两种方式实现
      * RDB Redis DataBase 持久性的保存数据 快照 在指定的时间间隔内将内存中的数据保存到硬盘中 保存的是内存中的数据的快照 这个快件文件为dump.rdb 默认是关闭的 可以通过配置文件开启 也可以通过命令开启
      * 如果重启了redis 会自动加载dump.rdb文件 会将dump.rdb文件中的数据加载到内存中
@@ -219,9 +221,9 @@ class LearnApplicationTests {
      * 如何禁用快照
      * 1. redis-cli config set save "" 命令行禁用
      * 2. 在配置文件中注释掉所有的save配置
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis持久化
      * AOF 需要在配置文件中打开AOF的配置
      * AOF 以日志的形式记录每个写操作 以文本的形式记录 将redis执行过的所有写命令记录下来 不记录读命令 只许追加文件 不可以改写文件
@@ -257,24 +259,24 @@ class LearnApplicationTests {
      * 5.启动时恢复速度慢
      * <p>
      * 可以设置aof文件超过多少字节时重写
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * rdb和aof混合使用
      * 如果两种方式都开启了 那么redis重启时 会优先加载aof文件 aof的优先级比rdb高
      * 如果aof文件损坏了 那么会加载rdb文件
      * 如果两种方式都没有开启 那么redis重启时 会加载rdb文件
      * 如果两种方式都开启了 那么可以通过配置文件设置优先加载rdb文件还是aof文件
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * 纯内存数据库
      * 关闭rdb和aof
      * 1.在配置文件中注释掉所有的save配置 save ""
      * 2.在配置文件中将appendonly设置为no
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis事务
      * 事务的本质是一组命令的集合 一个事务中的所有命令都会被序列化 然后按顺序执行
      * 单独的隔离操作
@@ -310,9 +312,9 @@ class LearnApplicationTests {
      * 1.如果事务中的某个命令执行失败 那么其后的命令仍然会被执行
      * 2.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令仍然会被执行
      * 3.在执行exec命令时 如果事务中的某个命令执行失败 那么其后的命令不会被执行
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis管道 pipeline 可以一次性发送多个命令给服务端 执行完毕后一次性返回结果 不是原子性的
      * 1.减少网络开销
      * 2.批量执行命令
@@ -334,8 +336,8 @@ class LearnApplicationTests {
      * 1. pipeline中的命令不会被打断
      * 2. pipeline中的命令不会被事物所影响
      * 3. pipeline中的命令不会被watch所影响
-     */
-    /**
+     * <p>
+     * <p>
      * redis发布订阅
      * Redis 的发布/订阅是一种消息传递模式，其中发布者将消息发送到特定的频道，而订阅者则通过订阅这些频道来接收消息。这种模式允许多个订阅者同时接收相同的消息，从而实现了消息的广播。
      * <p>
@@ -357,9 +359,9 @@ class LearnApplicationTests {
      * PUBLISH 命令支持向多个频道同时发布消息。
      * 订阅者可以通过使用 SUBSCRIBE 命令的阻塞模式来等待消息，从而避免了频繁的轮询操作。
      * 总结起来，Redis 的发布/订阅功能允许发布者将消息发送到指定的频道，而订阅者可以选择性地订阅这些频道以接收消息。这种模式可以在分布式系统中实现事件通知、实时消息推送等功能，非常灵活和高效。
-     */
-
-    /**
+     * <p>
+     * <p>
+     * <p>
      * redis主从复制
      * Redis的主从复制（Master-Slave Replication）是指将一个 Redis 服务器复制到多个 Redis 从服务器上。主服务器会将自己的数据变化同步给从服务器，从服务器一旦接收到数据变化就会立即同步更新自己的数据。
      * <p>
@@ -386,10 +388,10 @@ class LearnApplicationTests {
      * replcaof ip port 设置主从关系 主库ip 主库端口 配置文件中配置
      * slaveof ip port 设置主从关系 从库ip 从库端口 命令行配置
      * slaveof no one 取消主从关系
-     */
-
-
-    /**
+     * <p>
+     * <p>
+     * <p>
+     * <p>
      * redis哨兵
      * Redis Sentinel（哨兵）是 Redis 的高可用性解决方案，它能为 Redis 提供监控、通知以及自动故障迁移等功能。
      * 吹哨人 巡查redis 主机是否正常 根据投票数将主机切换 俗称 无人值守的哨兵机制
@@ -417,8 +419,9 @@ class LearnApplicationTests {
      * <p>
      * sentinel monitor mymaster ip port quorum
      * quorum:投票数 一般为哨兵数量的一半加1
-     */
-    /**
+     * <p>
+     * <p>
+     * <p>
      * 哨兵的运行流程和选举机制
      * 哨兵集群部署：在一个Redis Sentinel集群中，通常由多个哨兵节点组成。这些哨兵节点通过互相通信来共同管理一个或多个Redis主服务器和从服务器。
      * <p>
@@ -433,6 +436,19 @@ class LearnApplicationTests {
      * 高可用性恢复：一旦故障转移完成，Redis系统将恢复正常运行。哨兵节点会持续监控主服务器和从服务器的状态，并在必要时进行新一轮的故障检测和故障转移。
      * <p>
      * 总结起来，Redis Sentinel的运行流程是哨兵节点周期性地监控Redis服务器状态，当主服务器故障时，通过选举机制选出领导者哨兵节点，并由其执行故障转移操作，将一个从服务器提升为新的主服务器，从而实现高可用性和自动故障切换。
+     * <p>
+     * 选取新master的条件
+     * 1.优先级最高的slave
+     * 2.如果优先级相同，复制偏移量最大的slave
+     * 3.如果复制偏移量相同，runid最小的slave
+     * 使用建议
+     * 1.哨兵的数量最好是奇数个
+     * 2.各个哨兵之间的服务器配置要保持一致
+     * 3.哨兵集群+主从集群 不一定能保证数据零丢失
+     * <p>
+     * <p>
+     * redis 集群
+     * redis 集群是一个分布式的集群，它内置了分片技术，可以将数据分散到多个节点上，每个节点只存储一部分数据，这样每个节点就可以使用较低的内存来存储数据，从而降低了单个节点的内存压力。
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

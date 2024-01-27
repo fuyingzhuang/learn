@@ -449,6 +449,11 @@ class LearnApplicationTests {
      * <p>
      * redis 集群
      * redis 集群是一个分布式的集群，它内置了分片技术，可以将数据分散到多个节点上，每个节点只存储一部分数据，这样每个节点就可以使用较低的内存来存储数据，从而降低了单个节点的内存压力。
+     * 集群分片
+     * 集群分片是指将数据分散到多个节点上，每个节点只存储一部分数据。Redis 集群使用哈希槽（hash slot）来实现分片，一共有 16384 个哈希槽，每个键通过 CRC16 校验后对 16384 取模来决定放置哪个槽。
+     * 槽位最大16384
+     * 官方推荐槽位不要超过1000
+     *
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

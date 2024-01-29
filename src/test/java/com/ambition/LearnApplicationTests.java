@@ -471,10 +471,33 @@ class LearnApplicationTests {
      * 为啥redis哈希槽是16384个？
      * 16384 = 2^14
      * 1. 如果槽位是2^16，那么每个节点需要维护一个2^16的槽位数组，占用内存太大 每次发送心跳包会占用大量的带宽 2^16 = 65536  65536/8/1024 = 8KB
-     *    如果槽位是2^14，那么每个节点需要维护一个2^14的槽位数组，占用内存太大 每次发送心跳包会占用大量的带宽 2^14 = 16384  16384/8/1024 = 2KB
+     * 如果槽位是2^14，那么每个节点需要维护一个2^14的槽位数组，占用内存太大 每次发送心跳包会占用大量的带宽 2^14 = 16384  16384/8/1024 = 2KB
      * 2. redis的集群节点不会超过1000个，16384个槽位可以保证数据分布均匀
      * 3. 槽位越小 节点越少的情况下 压缩比越高 容易传输
      * <p>
+     * 集群扩容
+     * 扩容指的是向 Redis Cluster 中增加新的节点。当业务需求增加，集群中的节点无法满足负载时，我们可以通过扩容来增加集群的处理能力。
+     * Redis Cluster 的扩容操作相对简单，大致步骤如下：
+     * 部署新的 Redis 节点，并设置好节点的端口号和密码等信息。
+     * 使用 cluster meet 命令将新节点添加到集群中，并指定其他已有节点的地址和端口号。例如：
+     * $ redis-cli -c -p 6379 cluster meet <new_node_ip> <new_node_port>
+     * 使用 cluster addslots 命令将新节点负责的槽位分配给新节点。例如：
+     * $ redis-cli -c -p 6379 cluster addslots <start_slot> <end_slot>
+     * 当新节点接收到数据时，它会向其他节点请求数据，并将其复制到自己的机器上，完成数据迁移。
+     * 将新节点添加到业务的负载均衡器中，使其能够参与业务处理。
+     * 集群缩容
+     * 缩容指的是从 Redis Cluster 中移除一个或多个节点。当业务需求减少，集群中的节点过多时，我们可以通过缩容来降低集群的成本和复杂度。
+     * Redis Cluster 的缩容操作相对复杂，需要注意数据迁移和槽位重分配等问题，大致步骤如下：
+     * 使用 cluster forget 命令将要移除的节点从集群中删除。例如：
+     * $ redis-cli -c -p 6379 cluster forget <node_id>
+     * 使用 cluster rebalance 命令重新分配所有槽位的负责节点。例如：
+     * $ redis-cli -c -p 6379 cluster rebalance
+     * 当某个节点被移除后，如果它负责的槽位没有被合理分配给其他节点，则会导致数据不可用。为了避免这种情况，我们需要在移除节点之前，使用 cluster reshard 命令将节点负责的槽位进行迁移。例如：
+     * $ redis-cli -c -p 6379 cluster reshard --cluster-from <node_id> --cluster-to <new_node_id> --cluster-slots <num_slots>
+     * 其中，--cluster-from 指定要移除的节点，--cluster-to 指定一个新节点作为迁移目标，--cluster-slots 指定要迁移的槽位数量。
+     * 等待数据迁移完成，并确保集群中的每个节点都能正常处理业务请求。
+     * 更新业务的负载均衡器配置，确保所有请求都发送到集群中仍然存在的节点上。
+     * 需要注意的是，Redis Cluster 的缩容操作需要谨慎处理，否则可能会导致数据丢失或不可用。在进行缩容操作时，建议先备份数据并进行测试，确保整个过程能够成功完成。
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

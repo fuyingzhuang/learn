@@ -543,6 +543,29 @@ class LearnApplicationTests {
      * 4.5 异步IO Asynchronous IO
      * Redis为什么这么快的主要原因是什么？
      * IO多路复用 + epoll的使用 才是Redis快的直接原因
+     * 安全相关的问题
+     * 禁用危险命令 在redis.conf中设置rename-command CONFIG "" 禁用CONFIG命令
+     * 禁用keys *     在redis.conf中设置rename-command KEYS "" 禁用KEYS命令
+     * 禁用flushall 在redis.conf中设置rename-command FLUSHALL "" 禁用FLUSHALL命令
+     * 禁用flushdb 在redis.conf中设置rename-command FLUSHDB "" 禁用FLUSHDB命令
+     * BigKey问题
+     * 1.什么是BigKey
+     * 2.BigKey的危害
+     * 3.如何避免BigKey
+     * 4.如何定位BigKey
+     * 5.如何处理BigKey
+     * 6.如何预防BigKey
+     * SCAN命令
+     * SCAN 命令是一个基于游标的迭代器 从指定位置开始遍历集合元素
+     * 获取所有键名
+     * SCAN 0 会返回下次开始的游标和所有键名
+     * 第一个返回值是下次开始的游标 第二个返回值是所有键名
+     * 获取所有以“user:”开头的键名
+     * SCAN 0 MATCH user:*
+     * 每次返回5个键名
+     * SCAN 0 COUNT 5
+     * 组合使用
+     * SCAN 0 MATCH user:* COUNT 5
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

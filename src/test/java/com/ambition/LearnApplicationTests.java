@@ -550,22 +550,60 @@ class LearnApplicationTests {
      * 禁用flushdb 在redis.conf中设置rename-command FLUSHDB "" 禁用FLUSHDB命令
      * BigKey问题
      * 1.什么是BigKey
+     * 阿里巴巴Redis开发规范中定义BigKey是指一个value的大小大于10KB的key 如果是string类型的value 控制在10KB以内 hash list set zset类型的value 控制在5000个元素以内
      * 2.BigKey的危害
-     * 3.如何避免BigKey
-     * 4.如何定位BigKey
+     * 内存不均匀 集群迁移时会很慢 造成Redis阻塞 删除超时key时会很慢 造成Redis阻塞 网络流量阻塞
+     * 3.如何产生BigKey
+     * 社交类 粉丝列表 关注列表
+     * 汇总统计 类 产品销售排行榜
+     * 4.如何发现BigKey
+     * --bigkeys选项
+     * redis-cli --bigkeys
+     * memory usage key 查看具体的key的内存占用情况
      * 5.如何处理BigKey
-     * 6.如何预防BigKey
+     * 非字符串类型的BigKey 不要使用del命令删除 可以使用hscan lscan sscan zscan命令分批次删除
      * SCAN命令
      * SCAN 命令是一个基于游标的迭代器 从指定位置开始遍历集合元素
      * 获取所有键名
      * SCAN 0 会返回下次开始的游标和所有键名
-     * 第一个返回值是下次开始的游标 第二个返回值是所有键名
+     * 第一个返回值是下次开始的游标  第二个返回值是所有键名
      * 获取所有以“user:”开头的键名
      * SCAN 0 MATCH user:*
      * 每次返回5个键名
      * SCAN 0 COUNT 5
      * 组合使用
      * SCAN 0 MATCH user:* COUNT 5
+     * HSCAN命令
+     * HSCAN key cursor [MATCH pattern] [COUNT count]
+     * LSCAN命令
+     * LSCAN key cursor [MATCH pattern] [COUNT count]
+     * SSCAN命令
+     * SSCAN key cursor [MATCH pattern] [COUNT count]
+     * ZSCAN命令
+     * ZSCAN key cursor [MATCH pattern] [COUNT count]
+     * 6.如何预防BigKey
+     * 限制value的大小 控制在10KB以内
+     * 控制hash list set zset类型的value的元素个数 控制在5000个元素以内
+     * 7.删除BigKey
+     * 删除字符串类型的BigKey：使用DEL命令，将键名作为参数传递给该命令。例如，删除键名为mykey的字符串类型BigKey：
+     * DEL mykey
+     * 删除哈希类型的BigKey：使用HDEL命令，将哈希键和字段名作为参数传递给该命令。例如，删除哈希键为myhash的字段field1和field2：
+     * HDEL myhash field1 field2
+     * 删除列表类型的BigKey：使用LREM命令，将列表键、要删除的元素个数以及要删除的元素值作为参数传递给该命令。例如，从列表键mylist中删除前10个值为value的元素：
+     * LREM mylist 10 value
+     * 删除集合类型的BigKey：使用SREM命令，将集合键和要删除的成员值作为参数传递给该命令。例如，从集合键myset中删除值为member1和member2的成员：
+     * SREM myset member1 member2
+     * 删除有序集合类型的BigKey：使用ZREM命令，将有序集合键和要删除的成员值作为参数传递给该命令。例如，从有序集合键myzset中删除值为member1和member2的成员：
+     * ZREM myzset member1 member2
+     * 删除字典类型的BigKey：使用DEL命令，将字典键名作为参数传递给该命令。例如，删除字典键名为mydict的字典类型BigKey：
+     * DEL mydict
+     * 总结 先将BigKey变成小Key 再删除 尽量不要使用DEL命令删除BigKey 先将BigKey变成小Key 再删除
+     * BigKey的生产调优
+     * 1. redis.conf配置文件中设置lazyfree-lazy-deletes yes  & replica-lazy-flush yes & lazyfree-lazy-user-del yes
+     * <p>
+     * Redis的缓存双写一致性问题
+     * 1.缓存双写一致性问题
+     * redis和mysql双写一致性问题
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

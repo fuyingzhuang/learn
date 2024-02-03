@@ -603,7 +603,8 @@ class LearnApplicationTests {
      * <p>
      * Redis的缓存双写一致性问题
      * 1.缓存双写一致性问题
-     * redis和mysql双写一致性问题
+     * 延时双删问题
+     * 
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

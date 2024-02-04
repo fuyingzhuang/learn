@@ -603,8 +603,14 @@ class LearnApplicationTests {
      * <p>
      * Redis的缓存双写一致性问题
      * 1.缓存双写一致性问题
-     * 延时双删问题
-     * 
+     * 先更新数据库 再更新缓存 所有写操作都是以mysql为准 读操作先读缓存 如果缓存没有再读数据库
+     * <p>
+     * 常见名词
+     * UV unique visitor 独立访客
+     * PV page view 页面浏览量
+     * DAU daily active user 日活跃用户
+     * MAU monthly active user 月活跃用户
+     * <p>
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

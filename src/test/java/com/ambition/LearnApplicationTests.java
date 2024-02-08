@@ -633,6 +633,23 @@ class LearnApplicationTests {
      * 解决方案： 缓存穿透的解决方案主要从以下几个方面入手：
      * 1. 空对象缓存或者缺省值：当存储层不存在这个key对应的数据时，仍然将这个空结果进行缓存，但可以设置较短的过期时间。
      * 2. Google 布隆过滤器 Guava Cache 中的实现
+     *  示例:
+     *  public class BloomFilterDemo {
+     *   public static void main(String[] args) {
+     *    // 创建布隆过滤器
+     *    BloomFilter<Integer> filter = BloomFilter.create(Funnels.integerFunnel(), 1000000, 0.01);
+     *    // 插入数据
+     *    for (int i = 0; i < 1000000; i++) {
+     *    filter.put(i);
+     *    }
+     *    // 查询数据
+     *    int count = 0;
+     *    for (int i = 1000000; i < 2000000; i++) {
+     *    if (filter.mightContain(i)) {
+     *    count++;
+     *    }
+     *    }
+     *    
      * <p>
      * 在应用层增加校验，如在查询条件不合法时直接返回错误信息，而不是继续查询。
      * 使用布隆过滤器，在查询缓存和数据库之前对参数进行校验，如果该参数根据布隆过滤器的判断一定不存在，直接返回。

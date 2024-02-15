@@ -676,6 +676,7 @@ class LearnApplicationTests {
      * 使用限流和熔断等机制，当大量请求涌入时，及时拦截一部分请求，避免对数据库造成过大压力。
      * 在 Redis 中设置数据过期时间时，可以添加一个随机值，减少缓存同时失效的风险。
      * 
+     *
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

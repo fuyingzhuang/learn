@@ -696,6 +696,21 @@ class LearnApplicationTests {
      * 3. 避免死锁：在任何时刻，只有一个客户端能够获取锁。
      * 4. 不重入：客户端不能获取自己已经持有的锁。
      * 5. 不乱抢锁：客户端不能获取其他客户端已经持有的锁。
+     * lua脚本
+     * Redis 分布式锁的实现可以使用 Lua 脚本来保证原子性。Lua 脚本是 Redis 服务器内置的脚本解释器，可以在 Redis 服务器端执行 Lua 脚本。使用 Lua 脚本可以保证 Redis 分布式锁的加锁和解锁操作的原子性，从而避免在分布式环境中出现死锁或误解锁等问题。
+     * 命令示例
+     * eval "return redis.call('set', KEYS[1], ARGV[1], 'NX', 'PX', ARGV[2])" 1 lock lockId 10000
+     * eval : 执行 Lua 脚本的命令。
+     * "return redis.call('set', KEYS[1], ARGV[1], 'NX', 'PX', ARGV[2])" : Lua 脚本，用于设置锁。
+     * 1 : 键的数量。
+     * lock : 键名。
+     * lockId : 键值。
+     * 10000 : 锁的过期时间。
+     * 带有if else的lua脚本
+     * eval "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end" 1 lock lockId
+     * eval : 执行 Lua 脚本的命令。
+     * "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end" : Lua 脚本，用于释放锁。
+     * 通过使用 Lua 脚本，可以保证 Redis 分布式锁的加锁和解锁操作的原子性，从而避免在分布式环境中出现死锁或误解锁等问题。
      */
     @Resource
     private StringRedisTemplate stringRedisTemplate;

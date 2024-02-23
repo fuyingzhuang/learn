@@ -9,7 +9,7 @@ import java.net.URL;
  * @author Ambition
  * @date 2024/2/22 09:50
  */
-public class ClassLoaderTest1 {
+public class ClassLoaderTest2 {
     public static void main(String[] args) {
 
         // 获取系统类加载器

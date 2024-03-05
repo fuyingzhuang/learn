@@ -81,6 +81,11 @@
 - 1、与java环境外交互 
 - 2、与操作系统交互
 - 3、与Sun‘s JAVA API交互
+- 本地方法栈的作用：为虚拟机执行Native方法服务 也是线程私有的
+- 允许被实现成固定或者是可动态扩展的内存大小
+- 1、如果线程请求分配的栈容量超过了本地方法栈允许的最大容量 将会抛出StackOverflowError
+- 2、如果本地方法栈动态扩展时无法申请到足够的内存空间 则会抛出OutOfMemoryError
+- 本地方法栈使用C语言实现 它的具体做法是Native Method Stack中登记native方法 在Execution Engine执行时加载native库
 - Java堆：Java虚拟机所管理的内存中最大的一块，是被所有线程共享的一块内存区域，在虚拟机启动时创建
 - 元空间：JDK1.8之后，将原来的永久代移除，取而代之的是元空间，元空间与永久代最大的区别在于：元空间不在虚拟机中，而是使用本地内存，也即在Java8中，class
   metadata（the virtual machines internal presentation of Java class）,被存储在叫做元空间的native

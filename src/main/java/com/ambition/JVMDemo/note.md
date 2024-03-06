@@ -87,6 +87,9 @@
 - 2、如果本地方法栈动态扩展时无法申请到足够的内存空间 则会抛出OutOfMemoryError
 - 本地方法栈使用C语言实现 它的具体做法是Native Method Stack中登记native方法 在Execution Engine执行时加载native库
 - Java堆：Java虚拟机所管理的内存中最大的一块，是被所有线程共享的一块内存区域，在虚拟机启动时创建
+- 一个进程对应一个JVM实例，一个JVM实例对应一个Java堆，Java堆是JVM管理的最大的一块内存空间 一个JVM实例只有一个Java堆，Java堆是被所有线程共享的一块内存区域
+- 每一个线程在创建时都会创建一个Java栈和一个程序计数器，但是每一个线程都会共享一个Java堆
+- JVM一启动 Java堆就被创建出来了 其空间大小是在JVM启动时就被设定好的
 - 元空间：JDK1.8之后，将原来的永久代移除，取而代之的是元空间，元空间与永久代最大的区别在于：元空间不在虚拟机中，而是使用本地内存，也即在Java8中，class
   metadata（the virtual machines internal presentation of Java class）,被存储在叫做元空间的native
   memory中，而不再是存储在永久代中，这样可以避免永久代的内存溢出问题。

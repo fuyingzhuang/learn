@@ -103,3 +103,13 @@
 - 元空间：JDK1.8之后，将原来的永久代移除，取而代之的是元空间，元空间与永久代最大的区别在于：元空间不在虚拟机中，而是使用本地内存，也即在Java8中，class
   metadata（the virtual machines internal prese ntation of Java class）,被存储在叫做元空间的native
   memory中，而不再是存储在永久代中，这样可以避免永久代的内存溢出问题。
+- JVM的相关参数：
+  1. 设置堆空间大小的参数 -Xms 用来设置堆空间（年轻代+老年代）的初始化内存大小 -X 是jvm的运行参数 ms是memory start
+  2. 设置堆空间最大内存大小 -Xmx 用来设置堆空间（年轻代+老年代）的最大内存大小 mx是memory max
+  3. 默认堆空间的大小 -Xms等价于-XX:InitialHeapSize 4. 默认堆空间的最大内存大小 -Xmx等价于-XX:MaxHeapSize
+  5. 打印堆空间的信息 -XX:+PrintGCDetails
+  6. 默认的堆空间大小为电脑物理内存的1/64 
+  7. 默认的堆空间最大内存大小为电脑物理内存的1/4
+- 开发中建议将初始堆内存和最大堆内存设置为相同的值，避免因为堆内存扩容导致的性能抖动
+- jps：查看当前运行中的进程
+- jstat：查看jvm的统计信息 参数：-gc pid 
